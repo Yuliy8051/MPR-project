@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.MyRestController.Service;
+package pl.edu.pjwstk.MyRestController.service;
 
 import org.springframework.stereotype.Service;
 
@@ -8,6 +8,6 @@ public class StringUnitsService {
         return string.toUpperCase();
     }
     public String lower(String string){
-        return string.toLowerCase();
+        return string.charAt(0) + string.substring(1).toLowerCase();
     }
 }

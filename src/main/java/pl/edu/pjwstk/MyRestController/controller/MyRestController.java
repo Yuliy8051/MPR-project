@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pjwstk.MyRestController.Service.CatService;
+import pl.edu.pjwstk.MyRestController.service.CatService;
 import pl.edu.pjwstk.MyRestController.model.Cat;
 
 import java.util.List;
@@ -19,50 +19,50 @@ public class MyRestController {
         this.catService = catService;
     }
 
-    @GetMapping("cat/all")
+    @GetMapping("all")
     public ResponseEntity<Iterable<Cat>> getAllCats(){
         return ResponseEntity.ok(catService.getAll());
     }
 
-    @GetMapping("cat/id/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<Optional<Cat>> getCat(@PathVariable("id") Long id){
         return ResponseEntity.ok(catService.getById(id));
     }
 
-    @GetMapping("cat/name/{name}")
+    @GetMapping("name/{name}")
     public ResponseEntity<List<Cat>> findByName(@PathVariable String name){
         return ResponseEntity.ok(catService.getByName(name));
     }
 
-    @GetMapping("cat/color/{color}")
+    @GetMapping("color/{color}")
     public ResponseEntity<List<Cat>> getByColor(@PathVariable String color){
         return ResponseEntity.ok(catService.getByColor(color));
     }
 
-    @GetMapping("cat/allLower")
+    @GetMapping("allLower")
     public ResponseEntity<Iterable<Cat>> getAllLower(){
         return ResponseEntity.ok(catService.getAllLower());
     }
 
-    @PostMapping("cat/add")
+    @PostMapping("add")
     public ResponseEntity<Void> addCat(@RequestBody Cat cat){
         catService.addCat(cat);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("cat/addUpper")
+    @PostMapping("addUpper")
     public ResponseEntity<Void> addUpperCat(@RequestBody Cat cat){
         catService.addUpperCat(cat);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("cat/upgrade/id/{id}")
+    @PatchMapping("upgrade/{id}")
     public ResponseEntity<Void> upgradeById(@PathVariable Long id, @RequestBody Cat cat){
         catService.upgradeById(id, cat);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("cat/delete/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteCat(@PathVariable("id") Long id){
         catService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);

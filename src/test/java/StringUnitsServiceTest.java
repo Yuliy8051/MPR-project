@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.edu.pjwstk.MyRestController.Service.StringUnitsService;
+import pl.edu.pjwstk.MyRestController.service.StringUnitsService;
 
 public class StringUnitsServiceTest {
     private StringUnitsService testedService;

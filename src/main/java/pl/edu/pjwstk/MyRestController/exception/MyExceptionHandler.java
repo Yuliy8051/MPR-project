@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.MyRestController.Exception;
+package pl.edu.pjwstk.MyRestController.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleAlreadyExists(RuntimeException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(value = {CatHasInvalidFieldsException.})
-    public ResponseEntity<Object> handleAlreadyExists(RuntimeException ex){
+    @ExceptionHandler(value = {CatHasInvalidFieldsException.class})
+    public ResponseEntity<Object> handleInvalidFields(RuntimeException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

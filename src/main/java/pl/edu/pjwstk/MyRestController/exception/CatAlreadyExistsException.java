@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.MyRestController.Exception;
+package pl.edu.pjwstk.MyRestController.exception;
 
 public class CatAlreadyExistsException extends RuntimeException{
     public CatAlreadyExistsException(){

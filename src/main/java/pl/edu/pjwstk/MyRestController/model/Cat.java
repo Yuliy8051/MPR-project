@@ -27,6 +27,7 @@ public class Cat {
 
     public void setName(String name) {
         this.name = name;
+        setIdentifier();
     }
 
     public String getColor() {
@@ -35,6 +36,7 @@ public class Cat {
 
     public void setColor(String color) {
         this.color = color;
+        setIdentifier();
     }
 
     public Long getId() {
@@ -50,6 +52,7 @@ public class Cat {
     }
 
     public void setIdentifier(){
+        this.identifier = 0;
         String nameAndColor = this.name + this.color;
         for (int i = 0; i < nameAndColor.length(); i++) {
             this.identifier += nameAndColor.charAt(i);

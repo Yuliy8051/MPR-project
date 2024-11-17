@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.MyRestController.Repository;
+package pl.edu.pjwstk.MyRestController.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

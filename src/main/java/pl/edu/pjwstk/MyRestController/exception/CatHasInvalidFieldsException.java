@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.MyRestController.Exception;
+package pl.edu.pjwstk.MyRestController.exception;
 
 public class CatHasInvalidFieldsException extends RuntimeException{
     public CatHasInvalidFieldsException(){
