@@ -1,7 +1,13 @@
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockHttpServletResponse;
 import pl.edu.pjwstk.MyRestController.exception.CatAlreadyExistsException;
 import pl.edu.pjwstk.MyRestController.exception.CatHasInvalidFieldsException;
 import pl.edu.pjwstk.MyRestController.exception.CatNotFoundException;
@@ -10,8 +16,8 @@ import pl.edu.pjwstk.MyRestController.service.CatService;
 import pl.edu.pjwstk.MyRestController.service.StringUnitsService;
 import pl.edu.pjwstk.MyRestController.model.Cat;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
@@ -20,15 +26,15 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class CatServiceTest {
+    @Mock
     private CatRepository catRepository;
+    @Mock
     private StringUnitsService stringUnitsService;
+    @InjectMocks
     private CatService testedService;
 
-    @BeforeEach
-    public void setUp(){
-        catRepository = Mockito.mock(CatRepository.class);
-        stringUnitsService = Mockito.mock(StringUnitsService.class);
-        testedService = new CatService(catRepository, stringUnitsService);
+    public CatServiceTest(){
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
@@ -277,5 +283,34 @@ public class CatServiceTest {
         Optional<Cat> optionalCat = Optional.empty();
         when(catRepository.findById(any())).thenReturn(optionalCat);
         assertThrowsExactly(CatNotFoundException.class, () -> testedService.deleteById(id));
+    }
+    @Test
+    public void shouldReturnPdfWithFullInformation() throws IOException {
+        Cat cat = mock(Cat.class);
+        Optional<Cat> optionalCat = spy(Optional.of(cat));
+        HttpServletResponse response = spy(MockHttpServletResponse.class);
+
+        when(catRepository.findById(anyLong())).thenReturn(optionalCat);
+        when(cat.getId()).thenReturn(4L);
+        when(cat.getName()).thenReturn("Sasha");
+        when(cat.getColor()).thenReturn("Gray");
+        when(cat.getIdentifier()).thenReturn(456);
+
+        testedService.getPdfById(anyLong(), response);
+        verify(optionalCat).isEmpty();
+        verify(optionalCat).get();
+        verify(cat).getId();
+        verify(cat).getName();
+        verify(cat).getColor();
+        verify(cat).getIdentifier();
+        verify(response).getOutputStream();
+
+    }
+    @Test
+    public void shouldNotReturnPdf(){
+        Optional<Cat> optionalCat = Optional.empty();
+        when(catRepository.findById(anyLong())).thenReturn(optionalCat);
+        assertThrowsExactly(CatNotFoundException.class,
+                () -> testedService.getPdfById(anyLong(), new Response()));
     }
 }

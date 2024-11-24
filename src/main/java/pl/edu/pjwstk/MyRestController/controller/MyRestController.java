@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.MyRestController.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,12 @@ public class MyRestController {
     @GetMapping("id/{id}")
     public ResponseEntity<Optional<Cat>> getCat(@PathVariable("id") Long id){
         return ResponseEntity.ok(catService.getById(id));
+    }
+
+    @GetMapping(value = "pdf/{id}")
+    public ResponseEntity<Void> getPdfById(@PathVariable Long id, HttpServletResponse response){
+        catService.getPdfById(id, response);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("name/{name}")
