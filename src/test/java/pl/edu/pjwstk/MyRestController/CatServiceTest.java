@@ -1,7 +1,8 @@
+package pl.edu.pjwstk.MyRestController;
+
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

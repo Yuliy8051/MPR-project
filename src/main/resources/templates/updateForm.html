@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/view/addForm}" th:object="${cat}" method="post">
+    <table border="1">
+        <tr>
+            <td>Id:</td>
+            <td><input id="id" type="number" th:field="${cat.id}" required></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input id="name" type="text" th:field="${cat.name}"></td>
+        </tr>
+        <tr>
+            <td>Color:</td>
+            <td><input id="color" type="text" th:field="${cat.color}"></td>
+        </tr>
+        <tr>
+            <td><input id="submit" type="submit" value="Submit"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

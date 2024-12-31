@@ -27,6 +27,9 @@ public class CatService {
     public CatService(CatRepository repository, StringUnitsService stringUnitsService){
         this.stringUnitsService = stringUnitsService;
         this.repository = repository;
+        repository.save(new Cat("Tihrik", "Gray"));
+        repository.save(new Cat("Richard", "Brown"));
+        repository.save(new Cat("Michka", "White"));
     }
 
     public Iterable<Cat> getAll(){
@@ -109,6 +112,13 @@ public class CatService {
         if (cat.isEmpty())
             throw new CatNotFoundException();
         repository.deleteById(id);
+    }
+
+    public void deleteByNameAndColor(String name, String color){
+        List<Cat> cat = repository.findByNameAndColor(name, color);
+        if (cat.isEmpty())
+            throw new CatNotFoundException();
+        repository.deleteByNameAndColor(name, color);
     }
 
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>All my cats:</h1>
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Color:</td>
+    </tr>
+    <tr th:each="cat : ${cats}">
+        <td th:id="'row-' + ${cat.getId()} + '-name'" th:text="${cat.getName()}">
+        <td th:id="'row-' + ${cat.getId()} + '-color'" th:text="${cat.getColor()}">
+    </tr>
+</table>
+</body>
+</html>
